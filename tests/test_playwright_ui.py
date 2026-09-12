@@ -1,7 +1,7 @@
 import pytest
 
 pytest.importorskip("playwright.sync_api")
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import expect, sync_playwright
 
 
 @pytest.mark.playwright
@@ -15,7 +15,7 @@ def test_valid_login_shows_success_message(base_url):
         page.locator("#password").fill("Password123")
         page.locator("#login-btn").click()
 
-        assert page.locator("#login-status").inner_text() == "Login successful"
+        expect(page.locator("#login-status")).to_have_text("Login successful")
         browser.close()
 
 
@@ -30,7 +30,7 @@ def test_invalid_login_shows_error_message(base_url):
         page.locator("#password").fill("wrong")
         page.locator("#login-btn").click()
 
-        assert page.locator("#login-status").inner_text() == "Invalid credentials"
+        expect(page.locator("#login-status")).to_have_text("Invalid credentials")
         browser.close()
 
 
@@ -51,6 +51,6 @@ def test_search_filters_results(base_url, query, expected):
         page.locator("#search").fill(query)
         page.locator("#search-btn").click()
 
-        items = page.locator("#results li").all_inner_texts()
-        assert items == expected
+        expect(page.locator("#results li")).to_have_count(len(expected))
+        assert page.locator("#results li").all_inner_texts() == expected
         browser.close()
