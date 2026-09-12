@@ -177,10 +177,3 @@ Each issue should contain:
 
 See [`docs/bug_report_examples.md`](docs/bug_report_examples.md).
 
-## Resume-ready description
-
-> Designed and automated functional, regression, negative, boundary, and edge-case test cases for web application workflows using Playwright/Selenium with Python and Pytest. Validated REST API behavior with Postman, identified defects with precise reproduction steps and severity, and re-tested affected workflows after fixes.
-
-## License
-
-MIT
